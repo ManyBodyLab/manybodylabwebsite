@@ -81,7 +81,7 @@ export default function Home() {
                   View on GitHub
                 </a>
                 <a
-                  href="https://manybodylab.github.io/DiagHamInterface.jl/dev"
+                  href="https://manybodylab.github.io/DiagHamInterface.jl"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
@@ -127,7 +127,7 @@ export default function Home() {
                   View on GitHub
                 </a>
                 <a
-                  href="https://manybodylab.github.io/PeriodicArrays.jl/dev"
+                  href="https://manybodylab.github.io/PeriodicArrays.jl"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
@@ -173,7 +173,7 @@ export default function Home() {
                   View on GitHub
                 </a>
                 <a
-                  href="https://manybodylab.github.io/TensorKitAdapters.jl/dev"
+                  href="https://manybodylab.github.io/TensorKitAdapters.jl"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
@@ -219,7 +219,7 @@ export default function Home() {
                   View on GitHub
                 </a>
                 <a
-                  href="https://manybodylab.github.io/MPSKitAdapters.jl/dev"
+                  href="https://manybodylab.github.io/MPSKitAdapters.jl"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
