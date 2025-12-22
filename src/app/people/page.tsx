@@ -1,27 +1,106 @@
-"use client";
-
 import Link from "next/link";
+import ProfilePicture from "./ProfilePicture";
 
-export default function People() {
-  // Array of team members - can be easily updated with real data
-  const members = [
-    {
-      name: "Team Member 1",
-      bio: "Researcher in quantum many-body physics with expertise in tensor network methods and exact diagonalization.",
-      github: "username1",
-      linkedin: "username1",
-      // Using placeholder avatar from GitHub
-      avatar: "https://github.com/username1.png"
-    },
-    {
-      name: "Team Member 2",
-      bio: "Developer and researcher specializing in Monte Carlo methods and computational physics.",
-      github: "username2",
-      linkedin: "username2",
-      avatar: "https://github.com/username2.png"
-    },
-    // Add more members as needed
-  ];
+interface GitHubMember {
+  login: string;
+  avatar_url: string;
+  html_url: string;
+}
+
+interface GitHubUser {
+  name: string | null;
+  bio: string | null;
+  blog: string | null;
+  twitter_username: string | null;
+}
+
+interface Member {
+  name: string;
+  bio: string;
+  github: string;
+  linkedin: string | null;
+  avatar: string;
+}
+
+async function fetchMembers(): Promise<Member[]> {
+  try {
+    // Fetch organization members from GitHub API
+    const membersResponse = await fetch(
+      "https://api.github.com/orgs/ManyBodyLab/members",
+      {
+        headers: {
+          Accept: "application/vnd.github+json",
+        },
+        next: { revalidate: 3600 }, // Revalidate every hour
+      }
+    );
+
+    if (!membersResponse.ok) {
+      console.error("Failed to fetch organization members:", membersResponse.status);
+      return [];
+    }
+
+    const membersData: GitHubMember[] = await membersResponse.json();
+
+    if (!Array.isArray(membersData) || membersData.length === 0) {
+      console.log("No members found in organization");
+      return [];
+    }
+
+    // Fetch detailed profile information for each member
+    const memberDetails = await Promise.all(
+      membersData.map(async (member) => {
+        try {
+          const userResponse = await fetch(
+            `https://api.github.com/users/${member.login}`,
+            {
+              headers: {
+                Accept: "application/vnd.github+json",
+              },
+              next: { revalidate: 3600 },
+            }
+          );
+
+          if (!userResponse.ok) {
+            console.error(`Failed to fetch user ${member.login}`);
+            return null;
+          }
+
+          const userData: GitHubUser = await userResponse.json();
+
+          // Extract LinkedIn from blog URL if it contains linkedin.com
+          let linkedinUsername: string | null = null;
+          if (userData.blog && userData.blog.includes("linkedin.com/in/")) {
+            const match = userData.blog.match(/linkedin\.com\/in\/([^\/\?]+)/);
+            if (match) {
+              linkedinUsername = match[1];
+            }
+          }
+
+          return {
+            name: userData.name || member.login,
+            bio: userData.bio || "Member of ManyBodyLab organization",
+            github: member.login,
+            linkedin: linkedinUsername,
+            avatar: member.avatar_url,
+          };
+        } catch (err) {
+          console.error(`Error fetching details for ${member.login}:`, err);
+          return null;
+        }
+      })
+    );
+
+    // Filter out any failed requests
+    return memberDetails.filter((member): member is Member => member !== null);
+  } catch (err) {
+    console.error("Error fetching members:", err);
+    return [];
+  }
+}
+
+export default async function People() {
+  const members = await fetchMembers();
 
   return (
     <div className="min-h-screen">
@@ -61,7 +140,12 @@ export default function People() {
             Meet the researchers and developers behind ManyBodyLab&apos;s open-source quantum many-body physics software.
           </p>
 
-          <div className="grid gap-8 md:grid-cols-2">
+          {members.length === 0 ? (
+            <div className="text-center py-12">
+              <p className="text-gray-600 dark:text-gray-400">No team members found.</p>
+            </div>
+          ) : (
+            <div className="grid gap-8 md:grid-cols-2">
             {members.map((member) => (
               <div
                 key={member.github || member.name}
@@ -70,15 +154,10 @@ export default function People() {
                 <div className="flex gap-4">
                   {/* Profile Picture */}
                   <div className="flex-shrink-0">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
+                    <ProfilePicture 
                       src={member.avatar}
                       alt={`${member.name} profile`}
-                      className="w-24 h-24 rounded-full object-cover"
-                      onError={(e) => {
-                        // Fallback to a default avatar if the image fails to load
-                        (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&size=96&background=random`;
-                      }}
+                      name={member.name}
                     />
                   </div>
 
@@ -133,6 +212,7 @@ export default function People() {
               </div>
             ))}
           </div>
+          )}
         </section>
       </main>
 
