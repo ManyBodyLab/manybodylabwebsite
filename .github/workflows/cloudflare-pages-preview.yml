@@ -1,0 +1,22 @@
+name: Cloudflare Pages Preview
+
+on:
+  pull_request:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Build your site here if needed
+      # - run: npm ci && npm run build
+
+      - name: Deploy to Cloudflare Pages (preview)
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: your-project-name
+          directory: ./dist   # or your build output
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
