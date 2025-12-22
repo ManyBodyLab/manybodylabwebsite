@@ -25,6 +25,9 @@ interface Member {
 async function fetchMembers(): Promise<Member[]> {
   try {
     // Fetch organization members from GitHub API
+    // Note: Using unauthenticated requests (60/hour rate limit)
+    // For production with many members, consider adding GitHub token authentication
+    // via GITHUB_TOKEN environment variable to increase rate limit to 5000/hour
     const membersResponse = await fetch(
       "https://api.github.com/orgs/ManyBodyLab/members",
       {
@@ -42,14 +45,20 @@ async function fetchMembers(): Promise<Member[]> {
 
     const membersData: GitHubMember[] = await membersResponse.json();
 
+    // Validate the response data
     if (!Array.isArray(membersData) || membersData.length === 0) {
       console.log("No members found in organization");
       return [];
     }
 
+    // Validate member objects have required fields
+    const validMembersData = membersData.filter(
+      (member) => member && typeof member.login === "string" && member.login.length > 0
+    );
+
     // Fetch detailed profile information for each member
     const memberDetails = await Promise.all(
-      membersData.map(async (member) => {
+      validMembersData.map(async (member) => {
         try {
           const userResponse = await fetch(
             `https://api.github.com/users/${member.login}`,
@@ -70,10 +79,19 @@ async function fetchMembers(): Promise<Member[]> {
 
           // Extract LinkedIn from blog URL if it contains linkedin.com
           let linkedinUsername: string | null = null;
-          if (userData.blog && userData.blog.includes("linkedin.com/in/")) {
-            const match = userData.blog.match(/linkedin\.com\/in\/([^\/\?]+)/);
-            if (match) {
-              linkedinUsername = match[1];
+          if (userData.blog) {
+            // Support various LinkedIn URL formats
+            const linkedinPatterns = [
+              /linkedin\.com\/in\/([^\/\?\#]+)/i,
+              /linkedin\.com\/pub\/([^\/\?\#]+)/i,
+            ];
+            
+            for (const pattern of linkedinPatterns) {
+              const match = userData.blog.match(pattern);
+              if (match && match[1]) {
+                linkedinUsername = match[1].trim();
+                break;
+              }
             }
           }
 
