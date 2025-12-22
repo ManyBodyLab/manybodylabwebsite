@@ -61,10 +61,10 @@ export default function People() {
             Meet the researchers and developers behind ManyBodyLab&apos;s open-source quantum many-body physics software.
           </p>
 
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-2">
-            {members.map((member, index) => (
+          <div className="grid gap-8 md:grid-cols-2">
+            {members.map((member) => (
               <div
-                key={index}
+                key={member.github || member.name}
                 className="border border-gray-200 dark:border-gray-800 rounded-lg p-6 hover:shadow-lg transition-shadow"
               >
                 <div className="flex gap-4">
