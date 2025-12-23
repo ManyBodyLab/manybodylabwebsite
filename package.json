@@ -32,8 +32,9 @@
   },
   "scripts": {
     "build": "next build",
+    "build:cloudflare": "opennextjs-cloudflare build",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv env.d.ts",
-    "check": "npm run preview && tsc",
+    "check": "npm run build:cloudflare && tsc",
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
     "dev": "next dev",
     "lint": "next lint",
