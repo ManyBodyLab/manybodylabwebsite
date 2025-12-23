@@ -17,10 +17,10 @@ export interface Member {
 
 export const MEMBERS: Member[] = [
   {
-    name: "AFeuerpfeil",
-    bio: "Member of ManyBodyLab organization",
+    name: "Andreas Feuerpfeil",
+    bio: "Condensed matter physicist and julia enthusiast, developing open-source software for many-body physics in the @ManyBodyLab organization.",
     github: "AFeuerpfeil",
-    linkedin: null,
+    linkedin: "https://www.linkedin.com/in/andreas-feuerpfeil",
     avatar: "https://avatars.githubusercontent.com/u/36232041?v=4",
   },
 ];
