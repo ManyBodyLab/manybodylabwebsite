@@ -141,7 +141,7 @@ export default function Home() {
                 {/* Horizontal Scrollable Packages */}
                 <div className="lg:w-2/3 flex-grow">
                   <div className="overflow-x-auto pb-4 -mx-4 px-4 sm:mx-0 sm:px-0">
-                    <div className="flex gap-4 sm:gap-6" style={{ minWidth: "min-content" }}>
+                    <div className="flex gap-4 sm:gap-6 min-w-min">
                       {categoryPackages.map((pkg) => (
                         <PackageCard key={pkg.name} package={pkg} />
                       ))}
@@ -186,7 +186,7 @@ export default function Home() {
 
 function PackageCard({ package: pkg }: { package: Package }) {
   return (
-    <div className="flex-shrink-0 w-[280px] sm:w-[320px] border border-gray-200 dark:border-gray-800 rounded-xl p-4 sm:p-6 hover:shadow-xl transition-all bg-white dark:bg-gray-900 hover:scale-105">
+    <div className="flex-shrink-0 w-[280px] sm:w-[320px] border border-gray-200 dark:border-gray-800 rounded-xl p-4 sm:p-6 hover:shadow-xl transition-all bg-white dark:bg-gray-900 hover:scale-105 will-change-transform">
       <div className="mb-4">
         <h4 className="text-lg sm:text-xl font-semibold mb-2">{pkg.name}</h4>
         <span className="inline-block px-2 sm:px-3 py-1 text-xs sm:text-sm bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 rounded-full">
