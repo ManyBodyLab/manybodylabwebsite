@@ -8,17 +8,17 @@ const bannerSlides = [
   {
     title: "Open-Source Quantum Many-Body Physics",
     subtitle: "High-quality software tools for researchers and students",
-    gradient: "from-blue-600 to-purple-600"
+    gradient: "from-blue-900 to-blue-600"
   },
   {
     title: "Exact Diagonalization Solutions",
     subtitle: "Precise numerical methods for quantum systems",
-    gradient: "from-purple-600 to-pink-600"
+    gradient: "from-blue-700 to-blue-500"
   },
   {
     title: "Tensor Network Methods",
     subtitle: "Efficient representations of quantum states",
-    gradient: "from-pink-600 to-red-600"
+    gradient: "from-blue-800 to-blue-400"
   }
 ];
 
@@ -39,7 +39,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-blue-700 to-blue-500 bg-clip-text text-transparent">
                 ManyBodyLab
               </h1>
               <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mt-1">
@@ -129,8 +129,8 @@ export default function Home() {
               {/* Category Header - Desktop: side by side, Mobile: stacked */}
               <div className="flex flex-col lg:flex-row gap-6 sm:gap-8 mb-6 sm:mb-8">
                 <div className="lg:w-1/3 flex-shrink-0">
-                  <div className="sticky top-24 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-950 dark:to-purple-950 rounded-xl p-6 sm:p-8">
-                    <div className="text-4xl sm:text-5xl mb-3 sm:mb-4">{category.icon}</div>
+                  <div className="sticky top-24 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950 dark:to-blue-900 rounded-xl p-6 sm:p-8">
+                    {category.icon && <div className="text-4xl sm:text-5xl mb-3 sm:mb-4">{category.icon}</div>}
                     <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">{category.name}</h3>
                     <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300">
                       {category.description}
@@ -189,7 +189,7 @@ function PackageCard({ package: pkg }: { package: Package }) {
     <div className="flex-shrink-0 w-[280px] sm:w-[320px] border border-gray-200 dark:border-gray-800 rounded-xl p-4 sm:p-6 hover:shadow-xl transition-all bg-white dark:bg-gray-900 hover:scale-105 will-change-transform">
       <div className="mb-4">
         <h4 className="text-lg sm:text-xl font-semibold mb-2">{pkg.name}</h4>
-        <span className="inline-block px-2 sm:px-3 py-1 text-xs sm:text-sm bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 rounded-full">
+        <span className="inline-block px-2 sm:px-3 py-1 text-xs sm:text-sm bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full">
           {pkg.language}
         </span>
       </div>
