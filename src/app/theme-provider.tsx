@@ -15,12 +15,16 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>("light");
 
   useEffect(() => {
-    // Check localStorage for saved theme, otherwise check system preference
-    const savedTheme = localStorage.getItem("theme") as Theme | null;
-    if (savedTheme) {
+    // Ensure we're on the client side
+    if (typeof window === 'undefined') return;
+    
+    // Check localStorage for saved theme with validation
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "light" || savedTheme === "dark") {
       setTheme(savedTheme);
       document.documentElement.classList.toggle("dark", savedTheme === "dark");
     } else {
+      // Fall back to system preference
       const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
       const initialTheme = isDark ? "dark" : "light";
       setTheme(initialTheme);
