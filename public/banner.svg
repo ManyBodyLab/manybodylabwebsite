@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="400" viewBox="0 0 1600 400">
+  <defs>
+    <radialGradient id="bg2" cx="35%" cy="45%" r="80%">
+      <stop offset="0%" stop-color="#0b2a3f"/>
+      <stop offset="60%" stop-color="#071827"/>
+      <stop offset="100%" stop-color="#050f18"/>
+    </radialGradient>
+    <filter id="glow2" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="2.2" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="400" fill="url(#bg2)"/>
+
+  <!-- Particle field (left-heavy) -->
+  <g filter="url(#glow2)">
+    <!-- faint strands -->
+    <path d="M80 260 C220 140, 420 140, 560 260 C700 380, 900 360, 1040 220"
+          stroke="#7FDBFF" stroke-opacity="0.18" stroke-width="2" fill="none"/>
+    <path d="M120 120 C280 260, 420 260, 620 140 C820 20, 980 80, 1120 180"
+          stroke="#00B5FF" stroke-opacity="0.14" stroke-width="2" fill="none"/>
+
+    <!-- dots -->
+    <g fill="#7FDBFF" fill-opacity="0.55">
+      <circle cx="130" cy="240" r="2.5"/><circle cx="170" cy="210" r="2"/>
+      <circle cx="220" cy="180" r="2.5"/><circle cx="260" cy="155" r="2"/>
+      <circle cx="310" cy="145" r="2.5"/><circle cx="350" cy="150" r="2"/>
+      <circle cx="390" cy="170" r="2.5"/><circle cx="430" cy="205" r="2"/>
+      <circle cx="470" cy="240" r="2.5"/><circle cx="510" cy="275" r="2"/>
+      <circle cx="560" cy="300" r="2.5"/><circle cx="610" cy="310" r="2"/>
+      <circle cx="660" cy="300" r="2.5"/><circle cx="710" cy="270" r="2"/>
+      <circle cx="760" cy="235" r="2.5"/><circle cx="820" cy="215" r="2"/>
+      <circle cx="880" cy="220" r="2.5"/><circle cx="930" cy="240" r="2"/>
+      <circle cx="980" cy="265" r="2.5"/><circle cx="1030" cy="280" r="2"/>
+    </g>
+  </g>
+
+  <!-- Quote block (right side) -->
+  <g font-family="Montserrat, Inter, Arial, sans-serif" fill="#ffffff">
+    <text x="880" y="165" font-size="34" font-weight="650">From First Principles</text>
+    <text x="880" y="210" font-size="34" font-weight="650">to Scalable Computation</text>
+    <text x="880" y="252" font-size="18" opacity="0.75">Complex systems → computable insight</text>
+  </g>
+
+  <!-- subtle divider -->
+  <rect x="840" y="110" width="2" height="190" fill="#7FDBFF" opacity="0.25"/>
+</svg>
