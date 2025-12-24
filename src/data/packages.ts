@@ -60,17 +60,17 @@ export const categories: Category[] = [
   {
     name: "Exact Diagonalization",
     description: "Precise numerical solutions for finite quantum systems. Exact diagonalization methods provide the most accurate results for small to medium-sized quantum systems by directly computing eigenvalues and eigenvectors of the Hamiltonian matrix.",
-    icon: "⚛️"
+    icon: ""
   },
   {
     name: "Tensor Networks",
     description: "Efficient representations of quantum states. Tensor network methods enable the study of large quantum systems by exploiting their entanglement structure, making them essential for modern quantum many-body simulations.",
-    icon: "🕸️"
+    icon: ""
   },
   {
     name: "Utility Libraries",
     description: "General-purpose Julia utilities and tools. These packages provide fundamental building blocks and utilities that can be used across different computational physics applications.",
-    icon: "🔧"
+    icon: ""
   }
 ];
 
