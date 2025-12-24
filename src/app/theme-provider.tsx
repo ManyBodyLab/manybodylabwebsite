@@ -12,31 +12,31 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("light");
+  const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof window === "undefined") {
+      return "light";
+    }
+
+    const savedTheme = window.localStorage.getItem("theme");
+    if (savedTheme === "light" || savedTheme === "dark") {
+      return savedTheme;
+    }
+
+    const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    return isDark ? "dark" : "light";
+  });
 
   useEffect(() => {
-    // Ensure we're on the client side
-    if (typeof window === 'undefined') return;
-    
-    // Check localStorage for saved theme with validation
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "light" || savedTheme === "dark") {
-      setTheme(savedTheme);
-      document.documentElement.classList.toggle("dark", savedTheme === "dark");
-    } else {
-      // Fall back to system preference
-      const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      const initialTheme = isDark ? "dark" : "light";
-      setTheme(initialTheme);
-      document.documentElement.classList.toggle("dark", isDark);
-    }
-  }, []);
+    if (typeof window === "undefined") return;
+    document.documentElement.classList.toggle("dark", theme === "dark");
+  }, [theme]);
 
   const toggleTheme = () => {
+    if (typeof window === "undefined") return;
+    
     const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-    document.documentElement.classList.toggle("dark", newTheme === "dark");
+    window.localStorage.setItem("theme", newTheme);
   };
 
   return (

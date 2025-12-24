@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { categories, getPackagesByCategory, type Package } from "@/data/packages";
 import { ThemeToggle } from "./theme-toggle";
 
@@ -41,16 +42,13 @@ export default function Home() {
 
       {/* Banner */}
       <section className="relative h-[300px] sm:h-[400px] md:h-[500px] overflow-hidden">
-        <div className="w-full h-full bg-gradient-to-r from-blue-900 via-blue-700 to-blue-600 flex items-center justify-center">
-          <div className="text-center px-4 sm:px-6">
-            <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-4 sm:mb-6">
-              Open-Source Quantum Many-Body Physics
-            </h2>
-            <p className="text-lg sm:text-xl md:text-2xl text-white/90">
-              High-quality software tools for researchers and students
-            </p>
-          </div>
-        </div>
+        <Image 
+          src="/banner.svg" 
+          alt="ManyBodyLab - Open-Source Quantum Many-Body Physics" 
+          fill
+          className="object-cover"
+          priority
+        />
       </section>
 
       {/* Main Content */}

@@ -14,7 +14,7 @@ export function ThemeToggle() {
   // Prevent hydration mismatch by not rendering until mounted
   if (!mounted) {
     return (
-      <div className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 w-9 h-9" />
+      <div className="p-2 rounded-lg bg-gray-100 w-9 h-9" />
     );
   }
 
@@ -22,7 +22,8 @@ export function ThemeToggle() {
     <button
       onClick={toggleTheme}
       className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-      aria-label="Toggle theme"
+      aria-pressed={theme === "dark"}
+      aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
     >
       {theme === "light" ? (
         <svg
