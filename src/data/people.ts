@@ -20,7 +20,7 @@ export const MEMBERS: Member[] = [
     name: "Andreas Feuerpfeil",
     bio: "Condensed matter physicist and julia enthusiast, developing open-source software for many-body physics in the @ManyBodyLab organization.",
     github: "AFeuerpfeil",
-    linkedin: "andreas-feuerpfeil",
+    linkedin: "andreasfeuerpfeil",
     avatar: "https://avatars.githubusercontent.com/u/36232041?v=4",
   },
 ];
