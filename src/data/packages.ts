@@ -22,7 +22,7 @@ export const packages: Package[] = [
     language: "Julia",
     githubUrl: "https://github.com/ManyBodyLab/PeriodicArrays.jl",
     docsUrl: "https://manybodylab.github.io/PeriodicArrays.jl",
-    category: "Generic Julia Packages"
+    category: "Utility Libraries"
   },
   {
     name: "TensorKitAdapters.jl",
@@ -68,7 +68,7 @@ export const categories: Category[] = [
     icon: ""
   },
   {
-    name: "Generic Julia Packages",
+    name: "Utility Libraries",
     description: "General-purpose Julia utilities and tools. These packages provide fundamental building blocks and utilities that can be used across different computational physics applications.",
     icon: ""
   }

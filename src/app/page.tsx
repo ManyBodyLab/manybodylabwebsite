@@ -1,36 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import Image from "next/image";
 import { categories, getPackagesByCategory, type Package } from "@/data/packages";
-
-const bannerSlides = [
-  {
-    title: "Open-Source Quantum Many-Body Physics",
-    subtitle: "High-quality software tools for researchers and students",
-    gradient: "from-blue-900 to-blue-600"
-  },
-  {
-    title: "Exact Diagonalization Solutions",
-    subtitle: "Precise numerical methods for quantum systems",
-    gradient: "from-blue-700 to-blue-500"
-  },
-  {
-    title: "Tensor Network Methods",
-    subtitle: "Efficient representations of quantum states",
-    gradient: "from-blue-800 to-blue-400"
-  }
-];
+import { ThemeToggle } from "./theme-toggle";
 
 export default function Home() {
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % bannerSlides.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, []);
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-950">
@@ -46,7 +21,7 @@ export default function Home() {
                 Open-source software for quantum many-body physics
               </p>
             </div>
-            <nav className="flex gap-4 sm:gap-6">
+            <nav className="flex gap-4 sm:gap-6 items-center">
               <Link
                 href="/"
                 className="text-sm sm:text-base text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors"
@@ -59,47 +34,42 @@ export default function Home() {
               >
                 People
               </Link>
+              <ThemeToggle />
             </nav>
           </div>
         </div>
       </header>
 
-      {/* Rotating Banner */}
-      <section className="relative h-[300px] sm:h-[400px] md:h-[500px] overflow-hidden">
-        {bannerSlides.map((slide, index) => (
-          <div
-            key={index}
-            className={`absolute inset-0 transition-opacity duration-1000 ${
-              index === currentSlide ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            <div className={`w-full h-full bg-gradient-to-r ${slide.gradient} flex items-center justify-center`}>
-              <div className="text-center px-4 sm:px-6">
-                <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-4 sm:mb-6">
-                  {slide.title}
-                </h2>
-                <p className="text-lg sm:text-xl md:text-2xl text-white/90">
-                  {slide.subtitle}
-                </p>
-              </div>
+      {/* Hero Banner Section with Content Overlay */}
+      <section className="relative h-[400px] sm:h-[500px] md:h-[600px] overflow-hidden">
+        {/* Banner Background */}
+        <div className="absolute inset-0">
+          <Image 
+            src="/banner.svg" 
+            alt="ManyBodyLab - Open-Source Quantum Many-Body Physics" 
+            fill
+            className="object-cover"
+            priority
+          />
+          {/* Overlay for better text readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/40" />
+        </div>
+        
+        {/* Hero Content */}
+        <div className="relative h-full flex items-center px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto w-full">
+            <div className="max-w-2xl">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 drop-shadow-lg">
+                Open-Source Quantum Many-Body Physics
+              </h2>
+              <p className="text-lg sm:text-xl md:text-2xl text-white/95 mb-6 sm:mb-8 drop-shadow-md">
+                High-quality software tools for researchers and students
+              </p>
+              <p className="text-base sm:text-lg text-white/90 drop-shadow-md">
+                From first principles to scalable computation
+              </p>
             </div>
           </div>
-        ))}
-        
-        {/* Banner Navigation Dots */}
-        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex gap-2">
-          {bannerSlides.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentSlide(index)}
-              className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all ${
-                index === currentSlide
-                  ? "bg-white w-6 sm:w-8"
-                  : "bg-white/50 hover:bg-white/75"
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
         </div>
       </section>
 
