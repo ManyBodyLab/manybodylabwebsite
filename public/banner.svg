@@ -46,6 +46,12 @@
     <text x="880" y="252" font-size="18" opacity="0.75">Complex systems → computable insight</text>
   </g>
 
+<!-- Quote block (left side) -->
+  <g font-family="Montserrat, Inter, Arial, sans-serif" fill="#ffffff">
+    <text x="320" y="175" font-size="44" font-weight="650">Open-Source Quantum</text>
+    <text x="320" y="235" font-size="44" font-weight="650">Many-Body Physics</text>
+  </g>
+
   <!-- subtle divider -->
   <rect x="840" y="110" width="2" height="190" fill="#7FDBFF" opacity="0.25"/>
 </svg>
